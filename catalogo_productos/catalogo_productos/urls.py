@@ -10,7 +10,7 @@ urlpatterns = [
 
     # Login & Logout
     path('login/', views_django.LoginView.as_view(template_name="login.html"), name="iniciar_sesion"),
-    
+    path('logout/', views_django.logout_then_login, name="cerrar_sesion"),
     
     # Includes
     path("usuarios/", include('apps.usuarios.urls'))

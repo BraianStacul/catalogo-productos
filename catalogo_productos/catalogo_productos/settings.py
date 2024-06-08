@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = "usuarios.Usuario"
 
+LOGIN_URL = reverse_lazy('iniciar_sesion')
 LOGIN_REDIRECT_URL = reverse_lazy('pagina_principal')
 
 MIDDLEWARE = [
