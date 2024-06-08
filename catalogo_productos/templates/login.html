@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+    <h1>Iniciar sesión</h1>
+
+   
+
+    <div class="card">
+        <div class="card-body">  
+            
+            {% if mensaje_error %}
+                <div class="alert alert-danger" role="alert">
+                    {{mensaje_error}}
+                </div> 
+            {% endif %}
+        
+            <form method="post">{% csrf_token %}
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" id="username" name="username" class="form-control" value="{{nombre_usuario}}">
+
+                <labelclass="form-label">Contraseña</label>
+                <input type="password" id="password" name="password" class="form-control">
+
+                <hr class="my-4">
+
+                Si aun no tienes una cuenta, <a href="">haz click</a> para registrarte
+
+                <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Iniciar sesion</button>
+
+            </form>
+        </div>
+      </div>
+    
+
+{% endblock contenido %}
+
+
