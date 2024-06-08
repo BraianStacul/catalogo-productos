@@ -9,7 +9,8 @@ urlpatterns = [
     path('', views.home, name='pagina_principal'),
 
     # Login & Logout
-    path('login/', views.login, name="iniciar_sesion"),
+    path('login/', views_django.LoginView.as_view(template_name="login.html"), name="iniciar_sesion"),
+    
     
     # Includes
     path("usuarios/", include('apps.usuarios.urls'))
