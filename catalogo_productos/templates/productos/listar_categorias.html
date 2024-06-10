@@ -33,7 +33,7 @@
                             </td>
 							<td>
 								<a href="{% url 'productos:editar_categoria' categoria.pk %}" class="btn btn-primary btn-sm">EDITAR</a>
-                                <a href="#" class="btn btn-danger btn-sm disabled">ELIMINAR</i></a>
+                                <a href="{% url 'productos:eliminar_categoria' categoria.pk %}" class="btn btn-danger btn-sm">ELIMINAR</i></a>
 							</td>
 						</tr>
 					{% endfor %}

@@ -1,7 +1,7 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
 from .forms import ProductoForm, CForm #VerForm
@@ -47,4 +47,12 @@ class EditarCategoria(UpdateView):
     template_name = "productos/editar_categoria.html"
     model = Categoria
     form_class = CForm
+    success_url = reverse_lazy("productos:listar_categorias")
+
+class Eliminar(DeleteView):
+    model = Producto
+    success_url = reverse_lazy("productos:listar")
+
+class EliminarCategoria(DeleteView):
+    model = Categoria
     success_url = reverse_lazy("productos:listar_categorias")

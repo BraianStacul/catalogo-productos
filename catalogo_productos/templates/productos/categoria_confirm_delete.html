@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">            
+    <h1 class="h2">Confirmar Eliminación de Categoría {{categoria.nombre}} </h1>                       
+</div>
+
+<form method="POST">{% csrf_token %}
+    <p><strong>¿Desea eliminar el registro {{categoria.nombre}} ?</strong></p>
+    <button type="submit" class="btn btn-danger">Confirmar</button>
+</form>
+
+{% endblock contenido %}
