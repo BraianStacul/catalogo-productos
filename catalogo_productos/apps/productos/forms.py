@@ -25,3 +25,14 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ["nombre", "categorias", "precio", "descripcion", "activo"]
+
+
+class CForm(forms.ModelForm):
+
+    nombre = forms.CharField(
+        widget=forms.TextInput(attrs={'class' : 'form-control'})
+    )
+
+    class Meta:
+        model = Categoria
+        fields = ["nombre"]

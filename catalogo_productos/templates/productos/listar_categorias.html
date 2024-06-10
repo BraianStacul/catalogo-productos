@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+		<h1 class="h2">LISTA DE CATEGORIAS</h1>
+
+
+	</div>
+	<div class="row">
+
+		<div class="col">
+			<a href="{% url 'productos:nueva_categoria' %}" class="btn btn-primary">Nueva Categoria</a>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nombre</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for categoria in categorias %}
+
+
+
+						<tr>
+							<td>{{categoria.id}}</td>
+							<td>
+                                {{categoria.nombre}}
+                            </td>
+							<td>
+								<a href="#" class="btn btn-primary btn-sm disabled">EDITAR</a>
+                                <a href="#" class="btn btn-danger btn-sm disabled">ELIMINAR</i></a>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+
+		</div>
+	</div>
+{% endblock contenido %}
