@@ -11,7 +11,7 @@
 	<div class="row">
 
 		<div class="col">
-			<a href="#" class="btn btn-primary disabled">Nuevo Producto</a>
+			<a href="{% url 'productos:nuevo' %}" class="btn btn-primary">Nuevo Producto</a>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -29,7 +29,7 @@
 						<tr>
 							<td>{{producto.nombre}}</td>
 							<td>
-                                {% for c in producto.categoria.all %}
+                                {% for c in producto.categorias.all %}
                                     <span class="badge rounded-pill text-bg-warning">{{c.nombre}}</span>
                                 {% endfor %}
                             </td>
