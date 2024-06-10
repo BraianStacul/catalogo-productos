@@ -1,10 +1,10 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 
-from .forms import ProductoForm, CForm
+from .forms import ProductoForm, CForm #VerForm
 from .models import Producto, Categoria
 
 class Listar(ListView):
@@ -33,6 +33,18 @@ class ListarCategorias(ListView):
     
 class NuevaCategoria(CreateView):
     template_name = "productos/crear_categoria.html"
+    model = Categoria
+    form_class = CForm
+    success_url = reverse_lazy("productos:listar_categorias")
+
+class Editar(UpdateView):
+    template_name = "productos/editar.html"
+    model = Producto
+    form_class = ProductoForm
+    success_url = reverse_lazy("productos:listar")
+
+class EditarCategoria(UpdateView):
+    template_name = "productos/editar_categoria.html"
     model = Categoria
     form_class = CForm
     success_url = reverse_lazy("productos:listar_categorias")
