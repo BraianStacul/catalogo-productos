@@ -14,5 +14,6 @@ urlpatterns = [
     path('logout/', views_django.logout_then_login, name="cerrar_sesion"),
     
     # Includes
-    path("usuarios/", include('apps.usuarios.urls'))
+    path("usuarios/", include('apps.usuarios.urls')),
+    path("productos/", include('apps.productos.urls'))
 ]

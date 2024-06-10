@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+		<h1 class="h2">LISTA DE PRODUCTOS</h1>
+
+
+	</div>
+	<div class="row">
+
+		<div class="col">
+			<a href="#" class="btn btn-primary disabled">Nuevo Producto</a>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Nombre</th>
+						<th scope="col">Categorias</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for producto in productos %}
+
+
+
+						<tr>
+							<td>{{producto.nombre}}</td>
+							<td>
+                                {% for c in producto.categoria.all %}
+                                    <span class="badge rounded-pill text-bg-warning">{{c.nombre}}</span>
+                                {% endfor %}
+                            </td>
+							<td>
+                                <a href="#" class="btn btn-info btn-sm disabled"><i class="fa-solid fa-eye"></i></a>
+                                <a href="#" class="btn btn-success btn-sm disabled"><i class="fa-solid fa-star"></i></a>
+								<a href="#" class="btn btn-primary btn-sm disabled"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm disabled"><i class="fa-solid fa-trash"></i></a>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+
+		</div>
+	</div>
+{% endblock contenido %}
