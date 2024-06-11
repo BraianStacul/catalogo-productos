@@ -36,3 +36,30 @@ class CForm(forms.ModelForm):
     class Meta:
         model = Categoria
         fields = ["nombre"]
+
+class VerForm(forms.ModelForm):
+
+    categorias = forms.ModelMultipleChoiceField(
+        queryset=Categoria.objects.all(),
+        widget=forms.SelectMultiple(attrs={'disabled' : 'disabled'})
+    )
+
+    nombre = forms.CharField(
+        widget=forms.TextInput(attrs={'disabled' : 'disabled', 'class' : 'form-control'})
+    )
+
+    descripcion = forms.CharField(
+        widget=forms.Textarea(attrs={'disabled' : 'disabled', 'class' : 'form-control'})
+    )
+
+    activo = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={'disabled' : 'disabled'})
+    )
+
+    precio = forms.DecimalField(
+        widget=forms.TextInput(attrs={'disabled' : 'disabled', 'class' : 'form-control'})
+    )
+
+    class Meta:
+        model = Producto
+        fields = ["nombre", "categorias", "precio", "descripcion", "activo"]

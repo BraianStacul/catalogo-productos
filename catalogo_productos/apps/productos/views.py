@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
-from .forms import ProductoForm, CForm #VerForm
+from .forms import ProductoForm, CForm, VerForm
 from .models import Producto, Categoria
 
 class Listar(ListView):
@@ -56,3 +56,9 @@ class Eliminar(DeleteView):
 class EliminarCategoria(DeleteView):
     model = Categoria
     success_url = reverse_lazy("productos:listar_categorias")
+
+class ViewProducto(UpdateView):
+    template_name = "productos/ver_detalle.html"
+    model = Producto
+    form_class = VerForm
+    success_url = reverse_lazy("productos:listar")
