@@ -1,5 +1,6 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -14,7 +15,7 @@ class Listar(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return self.model.objects.all().order_by("nombre")
+        return self.model.objects.all().filter(activo = True).order_by("nombre")
 
 class Nuevo(LoginRequiredMixin,CreateView):
     template_name = "productos/crear.html"
@@ -62,3 +63,12 @@ class ViewProducto(UpdateView):
     model = Producto
     form_class = VerForm
     success_url = reverse_lazy("productos:listar")
+
+class Desactivar(DeleteView):
+    model = Producto
+
+    def post(self, request,pk, *args, **kwargs):
+        object = Producto.objects.get(id = pk)
+        object.activo = False
+        object.save()
+        return redirect("productos:listar")
