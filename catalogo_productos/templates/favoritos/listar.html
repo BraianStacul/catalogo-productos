@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+		<h1 class="h2">LISTA DE PRODUCTOS</h1>
+		{% if messages %}
+
+		<div class="alert alert-success" role="alert">
+			<ul>
+				{% for message in messages %}
+					<strong>{{message}}</strong>
+				{% endfor %}
+			</ul>
+		</div>
+		
+		{% endif %}
+
+	</div>
+	<div class="row">
+
+		<div class="col">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Nombre</th>
+						<th scope="col">Descripcion</th>
+						<th scope="col">Precio</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for favorito in favoritos %}
+						<div>
+							<tr>
+								<td>{{favorito.producto.nombre}}</td>
+								<td>{{favorito.producto.descripcion}}</td>
+								<td>{{favorito.producto.precio}}</td>
+								<td>
+									<form action="{% url 'favoritos:quitar_favorito_detalle' favorito.producto.pk %}" method="post">
+										{% csrf_token %}
+										<button type="submit" class="btn btn-danger btn-sm">Quitar de Favoritos</button>
+									</form>
+
+								</td>
+								
+							</tr>
+						</div>
+					{% endfor %}
+
+				</tbody>
+
+			</table>
+
+		</div>
+	</div>
+{% endblock contenido %}

@@ -15,5 +15,6 @@ urlpatterns = [
     
     # Includes
     path("usuarios/", include('apps.usuarios.urls')),
-    path("productos/", include('apps.productos.urls'))
+    path("productos/", include('apps.productos.urls')),
+    path("favoritos/", include('apps.favoritos.urls'))
 ]

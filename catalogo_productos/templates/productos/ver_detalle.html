@@ -7,7 +7,18 @@
 {% block contenido %}
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">            
         <h1 class="h2">Ver Detalle del Producto</h1>
-        <a href="#" class="btn btn-success btn-lg"><i class="fa-solid fa-star"></i></a>
+        <div>
+            <form style="display: inline-block;" action="{% url 'favoritos:agregar_favorito' producto.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg"><i class="fa-solid fa-heart"></i> Agregar a Favoritos </button>
+            </form>
+            
+            <form style="display: inline-block;" action="{% url 'favoritos:quitar_favorito' producto.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-lg"><i class="fa-regular fa-heart"></i></i> Quitar de Favoritos </button>
+            </form>
+        </div>
+        
     </div>
 
     <form method="POST">{% csrf_token %}
