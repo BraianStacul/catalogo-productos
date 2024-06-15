@@ -11,14 +11,14 @@
 	<div class="row">
 
 		<div class="col">
-			<a href="" class="btn btn-primary disabled">Nuevo usuario</a>
+			<!-- <a href="" class="btn btn-primary disabled">Nuevo usuario</a> -->
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">APELLIDO</th>
 						<th scope="col">NOMBRE</th>
-						<th>NOMBRE DE USUARIO</th>
-						
+						<th scope="col">NOMBRE DE USUARIO</th>
+						<th scope="col">ROLES</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,6 +28,13 @@
 							<td>{{usuario.last_name}}</td>
 							<td>{{usuario.first_name}}</td>
 							<td>{{usuario.username}}</td>
+							<td>
+								{% if usuario.es_admin %}
+									<p><i class="far fa-check-circle" style="color: green"></i> ES ADMINISTRADOR</p>
+								{% else %}
+									<p><i class="far fa-times-circle" style="color: red"></i> NO ES ADMINISTRADOR</p>
+								{% endif %}
+							</td>
 						</tr>
 					{% empty %}
 					<tr>

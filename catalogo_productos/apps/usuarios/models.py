@@ -6,3 +6,5 @@ from django.db import models
 class Usuario(AbstractUser):
     
     biografia = models.CharField(max_length=255, null=True, blank=True)
+
+    es_admin = models.BooleanField(default=False)

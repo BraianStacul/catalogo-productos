@@ -11,6 +11,14 @@ def home(request):
 
     return render(request, template_name, ctx)
 
+def pagina_error_permisos(request):
+    template_name = 'paginas/error_permisos.html'
+
+    ctx = {
+
+    }
+    return render(request, template_name, ctx)
+
 def registrarme(request):
     template_name = "registrarme.html"
     form = FormularioRegistroUsuario()

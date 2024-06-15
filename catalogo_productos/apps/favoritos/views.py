@@ -1,15 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-
-from apps.productos.models import Producto
-from apps.usuarios.models import Usuario
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
+
+from apps.utils.decorators import verificar_favorito
 
 from .models import Favorito
 
 # Create your views here.
 
-class Listar(ListView):
+class Listar(LoginRequiredMixin, ListView):
     template_name='favoritos/listar.html'
     model = Favorito
     context_object_name = 'favoritos'
@@ -18,6 +18,7 @@ class Listar(ListView):
     def get_queryset(self):
         return Favorito.objects.filter(usuario=self.request.user)
 
+@verificar_favorito()
 def agregar_favorito(request, producto_id):
     if request.method == 'POST':
         # Verificar si el producto ya está en la lista de favoritos
@@ -29,6 +30,7 @@ def agregar_favorito(request, producto_id):
 
     return redirect('productos:listar')
 
+@verificar_favorito()
 def quitar_favorito(request, producto_id):
     if request.method == 'POST':
         # Verificar si el producto está en la lista de favoritos del usuario
@@ -39,6 +41,7 @@ def quitar_favorito(request, producto_id):
             messages.error(request, 'El producto no está en la lista de favoritos.')
     return redirect('productos:listar')
 
+@verificar_favorito()
 def quitar_favorito_detalle(request, producto_id):
     if request.method == 'POST':
         if Favorito.objects.filter(usuario=request.user, producto_id=producto_id).exists():
