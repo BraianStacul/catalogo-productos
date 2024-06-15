@@ -5,17 +5,22 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django_filters.views import FilterView
+
 from apps.utils.mixins import VerificarAdmin
 from apps.utils.decorators import verificar_permisos
+
+from .filterset import ProductoFilter
 
 from .forms import ProductoForm, CForm, VerForm
 from .models import Producto, Categoria
 
-class Listar(ListView):
+class Listar(FilterView):
     template_name='productos/listar.html'
     model = Producto
     context_object_name = 'productos'
     paginate_by = 20
+    filterset_class=ProductoFilter
 
     def get_queryset(self):
         return self.model.objects.all().filter(activo = True).order_by("nombre")
