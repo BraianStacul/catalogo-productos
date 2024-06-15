@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 
+{% load static %}
+
 {% block contenido %}
 
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -30,7 +32,9 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th scope="col">Imagen</th>
 						<th scope="col">Nombre</th>
+						<th scope="col">Precio</th>
 						<th scope="col">Categorias</th>
 						<th>Acciones</th>
 					</tr>
@@ -42,7 +46,15 @@
 
 
 						<tr>
-							<td>{{producto.pk}} - {{producto.nombre}}</td>
+							<td>
+								{% if producto.imagen %}
+									<img height="25px" src="{{producto.imagen.url}}">
+								{% else %}
+									<img height="25px" src="{% static 'images/defaults/agregar-producto.png' %}">
+								{% endif %}
+							</td>
+							<td>{{producto.nombre}}</td>
+							<td>{{producto.precio}}</td>
 							<td>
                                 {% for c in producto.categorias.all %}
                                     <span class="badge rounded-pill text-bg-warning">{{c.nombre}}</span>

@@ -123,11 +123,14 @@ STATIC_URL = 'static/'
 
 RUTA_CARPETA_STATIC = os.path.join(BASE_DIR, "static")
 
-print("RUTA_CARPETA_STATIC:", RUTA_CARPETA_STATIC)
-
 STATICFILES_DIRS = (
     RUTA_CARPETA_STATIC,
 )
+
+# Contenido Media
+RUTA_CARPETA_MEDIA = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "media/"
+MEDIA_ROOT = RUTA_CARPETA_MEDIA
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

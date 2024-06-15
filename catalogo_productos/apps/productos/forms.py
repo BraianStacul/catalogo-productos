@@ -24,7 +24,7 @@ class ProductoForm(forms.ModelForm):
 
     class Meta:
         model = Producto
-        fields = ["nombre", "categorias", "precio", "descripcion", "activo"]
+        fields = ["nombre", "categorias", "precio", "descripcion", "activo", "imagen"]
 
 
 class CForm(forms.ModelForm):
@@ -62,4 +62,4 @@ class VerForm(forms.ModelForm):
 
     class Meta:
         model = Producto
-        fields = ["nombre", "categorias", "precio", "descripcion", "activo"]
+        fields = ["nombre", "categorias", "precio", "descripcion", "activo", "imagen"]
