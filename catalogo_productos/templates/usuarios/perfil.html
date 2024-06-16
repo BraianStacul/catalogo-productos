@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+													
+    <h1 class="h2">PERFIL DEL USUARIO</h1>                  
+                                    
+</div>
+
+<p><strong>Nombre:</strong> {{ user.get_full_name }}</p>
+<p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+{% if user.biografia %}
+    <p><strong>Biografía:</strong> {{ user.biografia }}</p>
+{% endif %}
+
+<!-- <a href="#">Editar Perfil</a> -->
+<a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-primary btn-sm">Editar Perfil</a>
+
+
+{% endblock contenido %}

@@ -62,6 +62,14 @@
         <li class="nav-item">
     
             {% if user.is_authenticated %}
+
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{% url 'usuarios:perfil' %}">
+                    <i class="fa-solid fa-user-pen"></i>
+                    MIS DATOS PERSONALES
+                </a>
+            </li>
+            <br class="my-3">
             
             <form action="{% url 'cerrar_sesion' %}" method="post">{% csrf_token %}
 

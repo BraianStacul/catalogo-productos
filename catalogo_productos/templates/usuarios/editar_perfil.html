@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+													
+    <h1 class="h2">EDITAR PERFIL DE {{user.username}} </h1>                  
+                                    
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+<a href="{% url 'usuarios:perfil' %}">Cancelar</a>
+
+{% endblock contenido %}
