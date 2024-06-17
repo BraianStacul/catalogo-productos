@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 
 from .models import Usuario
+from .forms import EditUser
 
 @verificar_permisos()
 def listar_usuarios(request):
@@ -34,8 +35,8 @@ class PerfilUsuario(LoginRequiredMixin, DetailView):
 
 class EditarPerfil(LoginRequiredMixin, UpdateView):
     model = Usuario
+    form_class = EditUser
     template_name = 'usuarios/editar_perfil.html'
-    fields = ['first_name', 'last_name', 'email', 'biografia'] 
 
     def get_object(self, queryset=None):
         return self.request.user 

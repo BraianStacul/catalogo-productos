@@ -8,7 +8,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
 
 from apps.utils.mixins import VerificarAdmin
-from apps.utils.decorators import verificar_permisos
 
 from .filterset import ProductoFilter
 

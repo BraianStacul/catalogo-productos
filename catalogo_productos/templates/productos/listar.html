@@ -57,9 +57,9 @@
 						<tr>
 							<td>
 								{% if producto.imagen %}
-									<img height="25px" src="{{producto.imagen.url}}">
+									<img height="50px" src="{{producto.imagen.url}}">
 								{% else %}
-									<img height="25px" src="{% static 'images/defaults/agregar-producto.png' %}">
+									<img height="50px" src="{% static 'images/defaults/agregar-producto.png' %}">
 								{% endif %}
 							</td>
 							<td>{{producto.nombre}}</td>
