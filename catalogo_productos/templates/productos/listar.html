@@ -23,8 +23,12 @@
 	<div class="row">
 		<div class="col">
 			<form method="get">
-				{{filter.form.as_p}}
-				<button type="sumbit" class="btn btn-primary btn-sm">Buscar</button>
+				<div class="input-group">
+
+					<input type="text" class="form-control" name="buscador" placeholder="Ingrese el nombre de la materia para buscar" value="{{buscador}}">
+					<button type="submit" class="btn btn-outline-secondary" type="button">BUSCAR</button>
+
+				</div>
 			</form>
 
 		</div>
