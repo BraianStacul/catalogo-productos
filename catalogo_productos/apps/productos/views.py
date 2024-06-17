@@ -13,6 +13,7 @@ from .filterset import ProductoFilter
 
 from .forms import ProductoForm, CForm, VerForm
 from .models import Producto, Categoria
+from apps.favoritos.models import Favorito
 
 class Listar(FilterView):
     template_name='productos/listar.html'
@@ -23,6 +24,22 @@ class Listar(FilterView):
 
     def get_queryset(self):
         return self.model.objects.all().filter(activo = True).order_by("nombre")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        productos = context['productos']
+
+        # Creamos un lista para almacenar todos los favoritos del usuarios
+        fpk = []
+
+        if not self.request.user.is_anonymous:
+            # Recorremos los favoritos del usuario actual y lo agregamos a la lista
+            for f in Favorito.objects.filter(usuario=self.request.user, producto__in=productos):
+                fpk.append(f.producto_id)
+
+        context['Favoritos'] = fpk
+        
+        return context
 
 class Nuevo(LoginRequiredMixin, VerificarAdmin, CreateView):
     template_name = "productos/crear.html"
