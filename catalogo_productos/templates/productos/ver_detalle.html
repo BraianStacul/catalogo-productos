@@ -13,12 +13,12 @@
     <div>
         <form style="display: inline-block;" action="{% url 'favoritos:agregar_favorito' producto.pk %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-success btn-lg"><i class="fa-solid fa-heart"></i> Agregar a Favoritos </button>
+            <button type="submit" class="btn btn-outline-success btn-lg mt-auto"><i class="fa-solid fa-heart"></i> Agregar a Favoritos </button>
         </form>
         
         <form style="display: inline-block;" action="{% url 'favoritos:quitar_favorito' producto.pk %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-lg"><i class="fa-regular fa-heart"></i></i> Quitar de Favoritos </button>
+            <button type="submit" class="btn btn-outline-danger btn-lg mt-auto"><i class="fa-regular fa-heart"></i></i> Quitar de Favoritos </button>
         </form>
     </div>
     
@@ -36,7 +36,10 @@
                 {% endif %}
             </div>
             <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
+                {% for c in producto.categorias.all %}
+                    <span class="badge rounded-pill text-bg-warning mb-3">{{c.nombre}}</span>
+                {% endfor %}
+                <div class="small mb-1">ID: {{form.instance.id}}</div>
                 <h1 class="display-5 fw-bolder">{{form.instance.nombre}}</h1>
                 <div class="fs-5 mb-5">
                     <!-- <span class="text-decoration-line-through">$45.00</span> -->
