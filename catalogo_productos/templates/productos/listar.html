@@ -41,80 +41,76 @@
 				<a href="{% url 'productos:nuevo' %}" class="btn btn-primary">Nuevo Producto</a>
 				<a href="{% url 'productos:listar_categorias' %}" class="btn btn-success">Ver Categorias</a>
 			{% endif %}
-				
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">Imagen</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Precio</th>
-						<th scope="col">Categorias</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
 
-					{% for producto in productos %}
+			<section>
+				<div class="container px-4 px-lg-5 mt-5">
+					<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+						
+						{% for producto in productos %}
 
-
-
-						<tr>
-							<td>
-								{% if producto.imagen %}
-									<img height="50px" src="{{producto.imagen.url}}">
-								{% else %}
-									<img height="50px" src="{% static 'images/defaults/not-product-found.webp' %}">
-								{% endif %}
-							</td>
-							<td>{{producto.nombre}}</td>
-							<td>{{producto.precio}}</td>
-							<td>
-                                {% for c in producto.categorias.all %}
-                                    <span class="badge rounded-pill text-bg-warning">{{c.nombre}}</span>
-                                {% endfor %}
-                            </td>
-							<td>
-								<!-- EN TEORIA ESTOS SOLO DEBERIAN MOSTRARSE PARA USUARIOS NORMALES -->
-
-								
-								 
-                                <a href="{% url 'productos:ver_detalle' producto.pk %}" class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></a>
-								
-								{% if user.is_authenticated and not user.es_admin %}
-								
-									{% if producto.pk in Favoritos %}
-										
-										<form style="display: inline-block;" action="{% url 'favoritos:quitar_favorito' producto.pk %}" method="post">
-											{% csrf_token %}
-											<button type="submit" class="btn btn-dark btn-sm"><i class="fa-regular fa-heart"></i></i></button>
-										</form>
-									
+							<div class="col mb-5">
+								<div class="card h-100">
+									<!-- Product image-->
+									{% if producto.imagen %}
+										<img src="{{producto.imagen.url}}">
 									{% else %}
-
-										<form style="display: inline-block;" action="{% url 'favoritos:agregar_favorito' producto.pk %}" method="post">
-											{% csrf_token %}
-											<button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-heart"></i></button>
-										</form>
-
+										<img src="{% static 'images/defaults/not-product-found.webp' %}">
 									{% endif %}
+									<!-- Product details-->
+									<div class="card-body p-4">
+										<div class="text-center">
+											<!-- Product name-->
+											<h5 class="fw-bolder">{{producto.nombre}}</h5>
+											<!-- Product price-->
+											ARS ${{producto.precio}}
+										</div>
+									</div>
+									<!-- Product actions-->
+									<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 
-								{% endif %}
+										<div class="text-center">
+											<a href="{% url 'productos:ver_detalle' producto.pk %}" class="btn btn-outline-info mt-auto"><i class="fa-solid fa-eye"></i> Ver </a>
+											
+											{% if user.is_authenticated and not user.es_admin %}
+										
+												{% if producto.pk in Favoritos %}
+													
+													<form class="p-3" style="display: inline-block;" action="{% url 'favoritos:quitar_favorito' producto.pk %}" method="post">
+														{% csrf_token %}
+														<button type="submit" class="btn btn-outline-dark mt-auto"><i class="fa-regular fa-heart"></i></i></button>
+													</form>
+												
+												{% else %}
 
-								{% if user.is_authenticated and user.es_admin %}
+													<form class="p-3" style="display: inline-block;" action="{% url 'favoritos:agregar_favorito' producto.pk %}" method="post">
+														{% csrf_token %}
+														<button type="submit" class="btn btn-outline-danger mt-auto"><i class="fa-solid fa-heart"></i></button>
+													</form>
 
-								<!-- EN TEORIA ESTOS SON PARA ADMINISTRADORES -->
-								<a href="{% url 'productos:editar' producto.pk %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="{% url 'productos:eliminar' producto.pk %}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> </a>
-                                <a href="{% url 'productos:desactivar' producto.pk %}" class="btn btn-dark btn-sm"><i class="fa-solid fa-eye-slash"></i></i> </a>
-								{% endif %}
+												{% endif %}
 
-							</td>
-						</tr>
-					{% endfor %}
+											{% endif %}
+										</div>									
+										
 
-				</tbody>
+										{% if user.is_authenticated and user.es_admin %}
 
-			</table>
+										<!-- EN TEORIA ESTOS SON PARA ADMINISTRADORES -->
+										<div class="text-center p-4">
+											<a href="{% url 'productos:editar' producto.pk %}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+											<a href="{% url 'productos:eliminar' producto.pk %}" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i> </a>
+											<a href="{% url 'productos:desactivar' producto.pk %}" class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-eye-slash"></i></i> </a>
+										</div>
+										
+										{% endif %}
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+					</div>
+				</div>
+			</section>		
 
 		</div>
 	</div>
